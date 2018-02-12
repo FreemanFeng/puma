@@ -1,0 +1,83 @@
+#+-----------------------------------------
+#| 以下是Uc测试类的配置
+#+-----------------------------------------
+server:
+    -
+        port: x
+        proto: other
+        name: 'Uc Start'
+
+#+-----------------------------------------
+#| 以下是测试服务地址
+#+-----------------------------------------
+ucstart:
+    id_cache:
+        server: localhost
+        port: 56060
+    mock_idm:
+        server: localhost
+        port: 56066
+    log:
+        server: localhost
+        port: 56080
+
+proxy:
+    id_cache:   /auto/ucstart/idcache
+    mock_idm:   /auto/ucstart/mockidm
+    log:        /auto/ucstart/logserver
+#+-----------------------------------------
+#| 以下是Andorid或IOS的启动配置
+#+-----------------------------------------
+app:
+    android:
+        init:
+            - 'sudo adb kill-server > /dev/null 2>&1'
+            - 'sudo adb start-server > /dev/null 2>&1'
+            #- 'sudo adb devices > /dev/null 2>&1'
+        connect:
+            - 'sudo adb connect device_name > /dev/null 2>&1'
+        start:
+            - 'sudo adb -s device_name shell am start -n package_name/activity_name > /dev/null 2>&1'
+        stop:
+            - 'sudo adb -s device_name shell am force-stop package_name > /dev/null 2>&1'
+            #- 'sudo adb shell pm clear com.UCMobile > /dev/null 2>&1'
+        install:
+            - 'sudo adb -s device_name uninstall package_name > /dev/null 2>&1'
+            - 'sudo adb -s device_name install apk_name  > /dev/null 2>&1'
+        uninstall:
+            - 'sudo adb -s device_name uninstall package_name > /dev/null 2>&1'
+    ios:
+        init:
+            - 'killall instruments'
+            - 'killall instruments'
+            #- 'sudo adb devices > /dev/null 2>&1'
+        connect:
+            - 'echo 1'
+        start:
+            - 'instruments -w device_name -t template_name package_name'
+        stop:
+            - 'killall instruments'
+            #- 'sudo adb shell pm clear com.UCMobile > /dev/null 2>&1'
+        install:
+            - 'ideviceinstaller -u device_name -U bundle_id'
+            - 'ideviceinstaller -u device_name -i ipa_path'
+        uninstall:
+            - 'ideviceinstaller -u device_name -U bundle_id'
+
+app_timeout:
+    install: 300.0
+#+-----------------------------------------
+#| 等待CMS前台同步后台数据, 目前3秒
+#+-----------------------------------------
+cms_wait: 3.0
+
+#+-----------------------------------------
+#| 以下是用于测试的变量定义
+#+-----------------------------------------
+params:
+
+results:
+
+cp:
+
+mode:

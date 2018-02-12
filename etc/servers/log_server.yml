@@ -1,0 +1,5 @@
+server:
+    -
+        port: 56080
+        proto: http
+        name: 'Log'

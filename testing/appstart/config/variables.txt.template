@@ -1,0 +1,57 @@
+*** Settings ***
+Documentation     系统内部用到的环境变量
+
+*** Variables ***
+#${TEST_SERVER}       100.84.47.14               # 用于功能测试
+${TEST_SERVER}      10.20.35.40                 # 用于功能测试
+${TEST_PORT}        58080                       # 用于功能测试
+
+${LDUS_SERVER}          100.84.72.192:59090     # LDUS服务地址
+${LDUS_PATH}            ldus                    # LDUS URL Path
+
+#${LDUS_SERVER}          117.135.147.33:18080    # LDUS服务地址
+#${LDUS_PATH}            ldus?us_ver=2.0         # LDUS URL Path
+
+#${LDUS_SERVER}          117.135.147.33:18080    # LDUS服务地址
+#${LDUS_PATH}            ldus?from=intl          # LDUS URL Path
+
+${WEB_HOST}             ${TEST_SERVER}          # 资源服务地址
+${WEB_PORT}             58089                   # 资源服务端口
+
+${ID_CACHE_SERVER}      ${TEST_SERVER}          # ID Cache服务地址
+#${ID_CACHE_PORT}        56060                   # ID Cache服务端口
+${ID_CACHE_PORT}        ${TEST_PORT}            # ID Cache服务端口
+
+${MOCK_IDM_SERVER}      ${TEST_SERVER}          # 闪屏服务地址
+#${MOCK_IDM_PORT}        56066                   # 闪屏服务端口
+${MOCK_IDM_PORT}        ${TEST_PORT}            # 闪屏服务端口
+
+${LOG_SERVER}           ${TEST_SERVER}          # 日志服务地址
+#${LOG_PORT}             56080                   # 日志服务端口
+${LOG_PORT}             ${TEST_PORT}            # 日志服务端口
+
+${INIT_TIMEOUT}         45                      # 等待初始化请求超时时间
+${LOG_TIMEOUT}          45                      # 等待上传日志超时时间
+${QUIT_TIMEOUT}         45                      # 等待退出超时时间
+${EXPIRE_TIMEOUT}       300                     # ID过期时间
+
+${DEVICE_COUNT}         1                       # 使用手机数目
+${DEVICE_IMEI}          865343021400682         # Android手机IMEI,仅用于本地调试
+${DEVICE_MAC}           F4:9F:F3:E7:6A:C6       # Android手机wifi MAC,仅用于本地调试
+${INSTALL_APP}          1                       # 是否安装app
+${DEBUG_DEVICE}         1                       # 是否使用本地手机测试，1:使用本地手机，0使用Hive手机
+
+${ANDROID_PACKAGE}      com.UCMobile                                                            # Android包名
+${ANDROID_ACTIVITY}     com.UCMobile.main.UCMobile                                              # Android活动名
+${ANDROID_DEVICE}       f49ff3e78dee                                                            # Android手机标识,仅用于本地调试
+#${ANDROID_APK}          /innova/tmp/UCBrowser_V11.7.9.959_android_pf145_Build171216163906.apk   # Android APK名称
+#${ANDROID_APK}          /innova/tmp/UCBrowser_V11.7.9.959_android_pf145_Build171219172905.apk   # Android APK名称
+#${ANDROID_APK}          /innova/tmp/UCBrowser_V11.7.9.959_android_pf145_Build171225104319.apk   # Android APK名称
+#${ANDROID_APK}          /innova/tmp/UCBrowser_V11.7.9.959_android_pf145_Build171222184014.apk   # Android APK名称
+${ANDROID_APK}          /innova/tmp/UCBrowser_V11.7.9.959_android_pf145_Build171227184947.apk   # Android APK名称
+
+${IOS_PACKAGE}          UCWEB.app    # iOS包名
+${IOS_DEVICE}           ddaad04809965f88c4cebb0cbfbc723c8fa4a8c2        # iOS手机标识,仅用于本地调试
+${IOS_TEMPLATE}         /Users/fhx/download/ios.tracetemplate           # iOS Instruments Template 用于调起应用
+${IOS_IPA}              /Users/fhx/download/UCBrowser_V11.8.2.1046_IP4X_pf41_app_Build171230223421.ipa      # iOS IPA名称
+${IOS_BUNDLEID}         com.ucbrowser.iphone    #iOS bundleid

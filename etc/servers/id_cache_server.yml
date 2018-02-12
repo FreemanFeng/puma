@@ -1,0 +1,5 @@
+server:
+    -
+        port: 56060
+        proto: http
+        name: 'Id Cache'

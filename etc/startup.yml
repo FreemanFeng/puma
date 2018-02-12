@@ -1,0 +1,63 @@
+# extra configs to be loaded
+configs:
+
+# events to be handled
+events:
+
+logger:
+    name: UCLogger
+    file:
+        level:      DEBUG
+        format:     "%(asctime)s %(levelname)s:%(name)s:%(filename)s:%(lineno)d: %(message)s"
+        filename:   "UCLogger.log"
+        datefmt:    "%Y-%m-%d %H:%M:%S"
+    console:
+        level:      INFO
+        format:     "%(levelname)s:%(name)s:%(filename)s:%(lineno)d: %(message)s"
+
+# server to be started
+server:
+
+# event set params
+params:
+
+# params used only once
+params_once:
+
+# storing middle results
+results:
+
+# used to check if the results are expected
+cp:
+
+# cp used only once
+cp_once:
+
+# extra preconfig
+preconf:
+
+# preconfig used only once
+preconf_once:
+
+# extra test steps
+steps:
+
+# test steps used only once
+steps_once:
+
+# running mode: robot / cli
+mode:
+
+# ssh hosts
+hosts:
+
+# process timeout
+timeout: 0.5
+
+# global config
+global_config:
+
+tmp: 'logs/'
+auto: 'logs/'
+cache: 'logs/'
+local: 'logs/'

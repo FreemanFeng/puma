@@ -1,0 +1,7 @@
+configs:
+    - 'etc/apps/ucstart/ucstart_config.yml'
+
+events:
+    -
+        name: events
+        handler: set_config

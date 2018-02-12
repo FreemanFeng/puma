@@ -1,0 +1,5 @@
+*** Settings ***
+Test Timeout      180 s
+Metadata          Author    Freeman
+Resource          ../resource.txt
+

@@ -1,0 +1,10 @@
+robotframework
+paramiko
+twisted
+pyOpenSSL
+httplib2
+requests
+service_identity
+wd
+retrying
+PyYAML

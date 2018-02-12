@@ -1,0 +1,11 @@
+*** Settings ***
+Documentation     设置检查点
+Resource          ../resource.txt
+
+*** Variables ***
+
+*** Keywords ***
+Expect Http Response
+    [Documentation]    设置Http Response检查点
+    [Arguments]     @{Params}
+    Check Extra Point     http      response    @{Params}

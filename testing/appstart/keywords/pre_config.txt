@@ -1,0 +1,124 @@
+*** Settings ***
+Documentation     设置配置操作关键字
+Resource          ../resource.txt
+
+*** Variables ***
+
+*** Keywords ***
+Config Timeout
+    [Documentation]     配置超时时间
+    [Arguments]     ${Timeout}
+    Pre Config  Set Timeout     ${Timeout}
+
+Config Params
+    [Documentation]     配置参数
+    [Arguments]     @{Params}
+    Pre Config  Update Params   @{Params}
+
+Config UC Start Timeout
+    [Documentation]     配置超时相关参数
+    [Arguments]     @{Params}
+    Pre Config      Build Map       timeout     @{Params}
+
+Config Log Server
+    [Documentation]     配置日志服务
+    [Arguments]     @{Params}
+    Pre Config      Build Map       log         @{Params}
+
+Config ID Cache
+    [Documentation]     配置ID Cache
+    [Arguments]     @{Params}
+    Pre Config      Build Map       id_cache    @{Params}
+
+Config Resource List
+    [Documentation]     配置ID Cache
+    [Arguments]     @{Params}
+    Pre Config      Config List     id_cache    res     @{Params}
+
+Config CMS Params
+    [Documentation]     配置CMS服务参数
+    [Arguments]     @{Params}
+    Pre Config      Build Map       cms     @{Params}
+
+Config IDM Params
+    [Documentation]     配置IDM服务参数
+    [Arguments]     @{Params}
+    Pre Config      Build Map       idm     @{Params}
+
+Config CMS Template
+    [Documentation]     配置CMS模板
+    [Arguments]     ${TemplateID}
+    Config CMS Params   resid   ${TemplateID}
+
+Config CMS Temp
+    [Documentation]     配置CMS临时数据
+    Config CMS Params   data_type   2
+
+Config CMS Data
+    [Documentation]     配置CMS数据
+    [Arguments]     ${Key}     @{Params}
+    Pre Config      Build Maps       cms     ${Key}    @{Params}
+
+Update CMS Data
+    [Documentation]     配置CMS数据
+    [Arguments]     @{Params}
+    Config CMS Data     update      @{Params}
+
+Append CMS Data
+    [Documentation]     配置CMS数据
+    [Arguments]     @{Params}
+    Config CMS Data     append      @{Params}
+
+Delete CMS Data
+    [Documentation]     配置CMS数据
+    [Arguments]     @{Params}
+    Config CMS Data     delete      @{Params}
+
+Pop CMS Data
+    [Documentation]     配置CMS数据
+    [Arguments]     @{Params}
+    Config CMS Data     pop         @{Params}
+
+Config IDM Type
+    [Documentation]     配置闪屏模板类型(video/gif/static)
+    [Arguments]     ${Type}
+    Config IDM Params   type    ${Type}
+
+Config IDM Data
+    [Documentation]     配置IDM数据
+    [Arguments]     ${Key}     @{Params}
+    Pre Config      Build Maps       idm     ${Key}    @{Params}
+
+Update IDM Data
+    [Documentation]     配置IDM数据
+    [Arguments]     @{Params}
+    Config IDM Data     update      @{Params}
+
+Append IDM Data
+    [Documentation]     配置IDM数据
+    [Arguments]     @{Params}
+    Config IDM Data     append      @{Params}
+
+Delete IDM Data
+    [Documentation]     配置IDM数据
+    [Arguments]     @{Params}
+    Config IDM Data     delete      @{Params}
+
+Pop IDM Data
+    [Documentation]     配置IDM数据
+    [Arguments]     @{Params}
+    Config IDM Data     pop         @{Params}
+
+Config Android Params
+    [Documentation]     配置Android参数
+    [Arguments]     @{Params}
+    Pre Config      Build Map       android     @{Params}
+
+Config iOS Params
+    [Documentation]     配置iOS参数
+    [Arguments]     @{Params}
+    Pre Config      Build Map       ios         @{Params}
+
+Config Devices
+    [Documentation]     初始化设备
+    Pre Config      Init Devices

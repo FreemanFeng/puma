@@ -1,0 +1,49 @@
+*** Settings ***
+Documentation     设置请求参数
+Resource          ../resource.txt
+
+*** Variables ***
+
+*** Keywords ***
+APP Test Service
+    [Documentation]    APP测试服务
+    [Arguments]             @{Params}
+    Config ID Cache         tcid            ${TEST NAME}
+    Config Log Server       cache_server    ${ID_CACHE_SERVER}:${ID_CACHE_PORT}
+    Config Devices
+    Start Uc    @{Params}
+
+Start Android APP
+    [Documentation]    Android APP测试服务
+    [Arguments]         @{Params}
+    Pre Config      Update Params   debug_device  ${DEBUG_DEVICE}
+    Config Android Params       package_name    ${ANDROID_PACKAGE}      activity_name   ${ANDROID_ACTIVITY}     device_name     ${ANDROID_DEVICE}
+    APP Test Service     platform    android     @{Params}
+
+Start iOS APP
+    [Documentation]    iOS APP测试服务
+    [Arguments]         @{Params}
+    #APP Test Service     platform    ios     @{Params}
+    Pre Config      Update Params   debug_device  ${DEBUG_DEVICE}
+    Config iOS Params       package_name    ${IOS_PACKAGE}    ios_ipa   ${IOS_IPA}      ipa_path   ${IOS_TEMPLATE}     device_name     ${IOS_DEVICE}    template_name   ${IOS_TEMPLATE}     bundle_id    ${IOS_BUNDLEID}
+    APP Test Service     platform    ios     @{Params}
+
+Enable CMS
+    [Documentation]     配置CMS服务
+    Config ID Cache     cms     http://${LDUS_SERVER}/${LDUS_PATH}
+    ${Path}     Init Data   cms
+    Config CMS Params   data_path   ${Path}
+
+Enable IDM
+    [Documentation]     配置IDM服务
+    Config ID Cache     idm     http://${MOCK_IDM_SERVER}:${MOCK_IDM_PORT}
+    ${Path}     Init Path   etc/protocol/idm
+    Config IDM Params   data_path   ${Path}
+
+Enable Services
+    [Documentation]     配置CMS/IDM服务
+    [Arguments]     @{Services}
+    # Robot Framework的for loop需要"\"标识缩进
+    :FOR    ${Service}   IN      @{Services}
+    \       Run Keyword IF  '${Service}' == 'CMS'       Enable CMS
+    \       Run Keyword IF  '${Service}' == 'IDM'       Enable IDM

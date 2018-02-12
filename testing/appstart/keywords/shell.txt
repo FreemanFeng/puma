@@ -1,0 +1,18 @@
+*** Settings ***
+Documentation     设置robot的setup/teardown关键字
+Resource          ../resource.txt
+
+*** Variables ***
+
+*** Keywords ***
+Cleanup Output
+    [Documentation]     清空输出目录
+    ${Ret}  Output Path
+    Log     Clean up ${Ret}
+    Run Cmd     rm -rf ${Ret}/*
+
+Cleanup Pids
+    [Documentation]     清空Pids目录
+    ${Ret}  Pids Path
+    Log     Clean up ${Ret}
+    Run Cmd     rm -rf ${Ret}/*

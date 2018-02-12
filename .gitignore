@@ -1,6 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.o
+*.swp
 *$py.class
 
 # C extensions
@@ -99,3 +101,53 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# 日志或其他类型文件
+*.swp
+*.log
+*.bak
+*.mp4
+*.gif
+*.png
+*.jpg
+core.*
+*.tar.gz
+
+# 过滤掉配置文件
+variables.txt
+variables.*.txt
+variables.debug.txt
+bench_config.txt
+#__init__.txt
+
+# ctags文件.
+.tags*
+tags
+
+# 过滤掉data/output目录及logs目录
+output/
+data/
+logs/
+man/
+share/
+libexec/*.trace/
+#bin/
+lib/
+include/
+src/apps/pb/
+src/apps/thrift/
+bin/netdata/var/
+go/src/*
+go/bin/*
+go/pkg/*
+go/pids/*
+go/data/*
+go/src/quantum/.idea/*
+.idea/
+
+#过滤掉nginx fullcache临时或日志目录(跟踪conf,sbin,html目录)
+www/data/
+
+# 跟踪文件或目录
+!/testing/__init__.txt
+!go/src/quantum

@@ -1,0 +1,11 @@
+*** Settings ***
+Library           Collections
+Library           String
+Library           AppStart.py
+Library           OperatingSystem
+Resource          config/variables.txt
+Resource          keywords/robot_environment.txt
+Resource          keywords/shell.txt
+Resource          keywords/checkpoints.txt
+Resource          keywords/pre_config.txt
+Resource          keywords/services.txt

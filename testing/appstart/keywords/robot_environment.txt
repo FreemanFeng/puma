@@ -1,0 +1,62 @@
+*** Settings ***
+Documentation     设置robot的setup/teardown关键字
+Resource          ../resource.txt
+
+*** Variables ***
+
+*** Keywords ***
+Suite Setup Common
+    [Documentation]    在用例集的Suite Setup中使用，目前会执行以下操作：
+    ...
+    ...    如有需要可以扩展
+    [Arguments]     ${Platform}     @{Params}
+    ${Ret}  Get Variable Value  ${SUITE_SETUP_ONCE}
+    Run Keyword If  ${Ret} is None      Suite Setup Once
+    Apply Devices   ${DEVICE_COUNT}     platform    ${Platform}     @{Params}
+    Install APP     ${INSTALL_APP}      ${DEVICE_COUNT}     platform    ${Platform}     @{Params}
+
+Suite Setup Once
+    [Documentation]    只执行一次，清空日志、output目录
+    Log    'Suite Setup Once'
+    Set Global Variable     ${SUITE_SETUP_ONCE}     ${TRUE}
+    Sync CMS Data Format
+    Cleanup Output
+    Cleanup Pids
+
+Suite Setup
+    [Documentation]    在用例集的Suite Setup中使用，目前会执行以下操作：
+    ...
+    ...    如有需要可以扩展
+    [Arguments]     ${Platform}
+    Log    'Suite Setup'
+    Init Config
+    Set Server      id_cache    ${ID_CACHE_SERVER}      ${ID_CACHE_PORT}
+    Set Server      mock_idm    ${MOCK_IDM_SERVER}      ${MOCK_IDM_PORT}
+    Set Server      log         ${LOG_SERVER}           ${LOG_PORT}
+    Run Keyword IF  '${Platform}' == 'android'          Suite Setup Common      android     debug_device  ${DEBUG_DEVICE}   package_name  ${ANDROID_PACKAGE}    device_name  ${ANDROID_DEVICE}      imei  ${DEVICE_IMEI}    mac  ${DEVICE_MAC}   apk_name  ${ANDROID_APK}
+    Run Keyword IF  '${Platform}' == 'ios'          Suite Setup Common      ios     debug_device  ${DEBUG_DEVICE}   package_name  ${IOS_PACKAGE}    device_name  ${IOS_DEVICE}      imei  ${DEVICE_IMEI}    mac  ${DEVICE_MAC}   ipa_path  ${IOS_IPA}       template_name       ${IOS_TEMPLATE}     bundle_id       ${IOS_BUNDLEID}
+
+Suite Teardown
+    [Documentation]    在用例集的Suite Teardown中使用，目前会执行以下操作：
+    ...
+    ...    如有需要可以扩展
+    Log    'Suite Teardown'
+    #Return Devices
+
+Test Teardown
+    [Documentation]    在用例集的Test Teardown中使用，目前会执行以下操作：
+    ...
+    ...    如有需要可以扩展
+    Log    'Test Teardown'
+    Init Cache
+    Clear Params
+
+Test Setup
+    [Documentation]    在用例集的Test Setup中使用，目前会执行以下操作：
+    ...
+    ...    如有需要可以扩展
+    [Arguments]     @{Services}
+    Log    'Test Setup'
+    Cleanup Pids
+    Enable Services     @{Services}
+    Config UC Start Timeout      init    ${INIT_TIMEOUT}      log     ${LOG_TIMEOUT}      quit    ${QUIT_TIMEOUT}       expire      ${EXPIRE_TIMEOUT}

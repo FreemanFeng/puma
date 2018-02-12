@@ -1,0 +1,32 @@
+*** Settings ***
+Suite Setup       Suite Setup   ios
+Suite Teardown    Suite Teardown
+Test Setup        Test Setup    IDM
+Test Teardown     Test Teardown
+Resource          ../../../resource.txt
+
+*** Variables ***
+${HTTP_SERVER}     ${WEB_HOST}:${WEB_PORT}
+
+*** Test Cases ***
+#+========================================
+#| 闪屏服务视频资源测试
+#+========================================
+idm_video_tc0010
+    [Documentation]    测试视频资源
+    Log     测试闪屏服务下发视频资源，启动正常
+    Config IDM Type         video
+    Config UC Start Timeout     quit    60
+    Update IDM Data         video_url   http://${HTTP_SERVER}/video/mp4/Full_E.mp4      display_type    full    creative_type   video
+    Start iOS UC
+
+idm_video_tc0020
+    [Documentation]    测试视频资源
+    Log     测试闪屏服务下发视频资源，启动正常
+    Config IDM Type         video
+    Config UC Start Timeout     quit    60
+    Update IDM Data         display_type    full    creative_type   video
+    Start iOS UC
+
+*** Keywords ***
+
